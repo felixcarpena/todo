@@ -1,0 +1,11 @@
+version: '3'
+services:
+  php:
+    container_name: todo-php
+    build: ./docker/php
+    volumes:
+      - ./:/app
+    ports:
+      - "8080:9501"
+#    command: php /app/public/index.php
+    command: tail -f /dev/null
