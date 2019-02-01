@@ -1,6 +1,5 @@
 <?php
 
-use App\Kernel;
 use Insidestyles\SwooleBridge\Adapter\Kernel\Psr15SymfonyKernel;
 use Insidestyles\SwooleBridge\Adapter\SymfonyAdapter;
 use Insidestyles\SwooleBridge\Builder\RequestBuilderFactory;

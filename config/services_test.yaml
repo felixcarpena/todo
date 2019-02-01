@@ -1,0 +1,2 @@
+services:
+    Shared\Domain\UuidProvider: '@Shared\Infrastructure\InMemoryUuidProvider'

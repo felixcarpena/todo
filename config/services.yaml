@@ -1,15 +1,44 @@
 parameters:
+  locale: 'en'
 
 services:
-    _defaults:
-        autowire: true
-        autoconfigure: true
-        public: false
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
 
-    App\:
-        resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+  Todo\:
+    resource: '../src/Todo/*'
+    exclude: '../src/Todo/{Domain}'
 
-    App\Infrastructure\Ui\Http\:
-        resource: '../src/Infrastructure/Ui/Http/'
-        tags: ['controller.service_arguments']
+  Shared\:
+    resource: '../src/Shared/*'
+    exclude: '../src/Shared/{Domain}'
+
+  Todo\Infrastructure\Ui\Http\:
+    resource: '../src/Todo/Infrastructure/Ui/Http/'
+    tags: ['controller.service_arguments']
+
+  Shared\Domain\Bus\Bus: '@Shared\Infrastructure\Bus\Bus'
+
+  bus: '@Shared\Infrastructure\Bus\Bus'
+
+  Shared\Infrastructure\Bus\Bus:
+    $commandBus: '@messenger.bus.commands'
+    $eventBus: '@messenger.bus.events'
+
+  Todo\Domain\Todo\TodoIdGenerator: ~
+
+  Shared\Domain\UuidProvider: '@Shared\Infrastructure\StandardUuidProvider'
+
+  Todo\Domain\Todo\Create\CreateTodoHandler:
+    tags:
+      - { name: messenger.message_handler, bus: 'messenger.bus.commands', handles: 'Todo\Domain\Todo\Create\CreateTodo',  method: 'handle' }
+
+  Shared\Domain\EventStore: '@Shared\Infrastructure\PdoEventStore'
+
+  Todo\Domain\Todo\TodoRepository: '@Todo\Infrastructure\Persistence\Doctrine\Repository\DbalTodoRepository'
+
+  Shared\Domain\EventResolver: '@Shared\Infrastructure\InMemoryEventResolver'
+
+  Shared\Domain\EventSerializer: ~
