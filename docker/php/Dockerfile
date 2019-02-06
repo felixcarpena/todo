@@ -31,10 +31,4 @@ RUN apt-get install -y librabbitmq-dev && pecl install amqp-1.9.4 && docker-php-
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# enable non-sudo user
-RUN apt-get install sudo
-RUN adduser --disabled-password --gecos '' docker
-RUN adduser docker sudo
-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-
 WORKDIR /app

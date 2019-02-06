@@ -8,5 +8,7 @@ interface AggregateId
 {
     public function __toString(): string;
 
+    public function value(): string;
+
     public function equals(AggregateId $item): bool;
 }

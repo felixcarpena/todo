@@ -19,12 +19,16 @@ final class TodoId implements AggregateId
 
     public function __toString(): string
     {
+        return $this->value();
+    }
+
+    public function value(): string
+    {
         return $this->value;
     }
 
     public function equals(AggregateId $item): bool
     {
-        Assert::that($item)->isInstanceOf(static::class);
-        $item->value === $this->value;
+        return $item instanceof static && $item->value === $this->value;
     }
 }

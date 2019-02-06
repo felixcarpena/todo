@@ -29,7 +29,10 @@ final class SetupContext implements Context
     /** @BeforeScenario */
     public function cleanTables()
     {
+        $tablesToBeCleaned = ['event_store', 'todo'];
         $conn = $this->kernel->getContainer()->get('database_connection');
-        $conn->executeQuery('TRUNCATE TABLE event_store RESTART IDENTITY');
+        foreach ($tablesToBeCleaned as $table) {
+            $conn->executeQuery("TRUNCATE TABLE $table RESTART IDENTITY");
+        }
     }
 }

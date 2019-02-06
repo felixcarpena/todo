@@ -11,7 +11,7 @@ default:
       - Tests\Behat\Todo\Context\TodoContext:
           bus: '@Aliased\Shared\Infrastructure\Bus\Bus'
           todoCreator: '@Aliased\Todo\Application\Todo\Create\TodoCreator'
-          todoRepository: '@Todo\Domain\Todo\TodoRepository'
+          todoView: '@Todo\Domain\Todo\ReadModel\TodoView'
   extensions:
     Behat\Symfony2Extension:
       kernel:

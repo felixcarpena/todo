@@ -42,3 +42,10 @@ services:
   Shared\Domain\EventResolver: '@Shared\Infrastructure\InMemoryEventResolver'
 
   Shared\Domain\EventSerializer: ~
+
+  Todo\Domain\Todo\ReadModel\TodoView: '@Todo\Infrastructure\Persistence\Doctrine\ReadModel\DbalTodoView'
+
+  #events
+  Todo\Domain\Todo\ReadModel\TodoProjector:
+    tags:
+      - { name: messenger.message_handler, bus: 'messenger.bus.events', handles: 'Todo\Domain\Todo\Create\TodoWasCreated',  method: 'on' }

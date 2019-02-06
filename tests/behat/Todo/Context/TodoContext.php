@@ -9,8 +9,7 @@ use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use Shared\Domain\Bus\Bus;
 use Todo\Application\Todo\Create\TodoCreator;
-use Todo\Domain\Todo\TodoId;
-use Todo\Domain\Todo\TodoRepository;
+use Todo\Domain\Todo\ReadModel\TodoView;
 
 class TodoContext implements Context
 {
@@ -18,14 +17,14 @@ class TodoContext implements Context
     private $bus;
     /** @var TodoCreator */
     private $todoCreator;
-    /** @var TodoRepository */
-    private $todoRepository;
+    /** @var TodoView */
+    private $todoView;
 
-    public function __construct(Bus $bus, TodoCreator $todoCreator, TodoRepository $todoRepository)
+    public function __construct(Bus $bus, TodoCreator $todoCreator, TodoView $todoView)
     {
         $this->bus = $bus;
         $this->todoCreator = $todoCreator;
-        $this->todoRepository = $todoRepository;
+        $this->todoView = $todoView;
     }
 
     /**
@@ -43,7 +42,7 @@ class TodoContext implements Context
      */
     public function theTodoAndDescriptionShouldExist(string $id, string $description)
     {
-        $todo = $this->todoRepository->get(new TodoId($id));
+        $todo = $this->todoView->byId($id);
 
         Assert::that($todo->id())->eq($id);
         Assert::that($todo->description())->eq($description);
