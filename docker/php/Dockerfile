@@ -28,7 +28,16 @@ RUN pecl install swoole-4.2.12 && docker-php-ext-enable swoole
 # install amqp
 RUN apt-get install -y librabbitmq-dev && pecl install amqp-1.9.4 && docker-php-ext-enable amqp
 
+# Install pcov
+RUN pecl install pcov && docker-php-ext-enable pcov
+
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# enable non-sudo user
+RUN apt-get install sudo
+RUN adduser --disabled-password --gecos '' docker
+RUN adduser docker sudo
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 WORKDIR /app
