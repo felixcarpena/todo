@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace Todo\Application\Todo\Create;
 
 use Shared\Domain\Bus\Bus;
+use Shared\Domain\IdGenerator;
 use Todo\Domain\Todo\Create\CreateTodo;
-use Todo\Domain\Todo\TodoIdGenerator;
 
 final class TodoCreator
 {
-    /** @var TodoIdGenerator */
+    /** @var IdGenerator */
     private $idGenerator;
     /** @var Bus */
     private $bus;
 
-    public function __construct(TodoIdGenerator $idGenerator, Bus $bus)
+    public function __construct(IdGenerator $idGenerator, Bus $bus)
     {
         $this->idGenerator = $idGenerator;
         $this->bus = $bus;

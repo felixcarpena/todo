@@ -45,6 +45,7 @@
         "psr-4": {
             "Tests\\": "tests/",
             "Tests\\Behat\\": "tests/behat",
+            "Tests\\Unit\\": "tests/unit",
             "Spec\\": "tests/spec"
         }
     },
