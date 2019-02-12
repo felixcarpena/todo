@@ -13,6 +13,9 @@ RUN apt-get install -y libpq-dev \
 # install zip
 RUN apt-get install zip unzip
 
+# Install zip
+RUN apt-get install -y libzip-dev && docker-php-ext-install zip
+
 # Install bcmath
 RUN docker-php-ext-install bcmath
 

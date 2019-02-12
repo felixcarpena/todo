@@ -29,6 +29,9 @@ services:
 
   Todo\Domain\Todo\TodoIdGenerator: ~
 
+  Todo\Application\Todo\Create\TodoCreator:
+    $idGenerator: '@Todo\Domain\Todo\TodoIdGenerator'
+
   Shared\Domain\UuidProvider: '@Shared\Infrastructure\StandardUuidProvider'
 
   Todo\Domain\Todo\Create\CreateTodoHandler:

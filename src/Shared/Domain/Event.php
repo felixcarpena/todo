@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Shared\Domain;
 
-use Shared\Domain\Messaging\Message;
-
-interface Event extends Message
+interface Event extends Messaging\AsyncMessage
 {
     public function eventName(): string;
 
