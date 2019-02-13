@@ -50,9 +50,4 @@ final class TodoWasCreated implements Event
             'description' => $this->description,
         ];
     }
-
-    public function jsonSerialize()
-    {
-        return $this->toArrayOfPlainValues();
-    }
 }
