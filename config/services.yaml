@@ -15,40 +15,49 @@ services:
     resource: '../src/Shared/*'
     exclude: '../src/Shared/{Domain}'
 
+  Tests\Behat\:
+    resource: '../tests/behat/*'
+
   Todo\Infrastructure\Ui\Http\:
     resource: '../src/Todo/Infrastructure/Ui/Http/'
     tags: ['controller.service_arguments']
 
+  #buses
   Shared\Domain\Bus\Bus: '@Shared\Infrastructure\Bus\Bus'
-
   bus: '@Shared\Infrastructure\Bus\Bus'
-
   Shared\Infrastructure\Bus\Bus:
     $commandBus: '@messenger.bus.commands'
     $eventBus: '@messenger.bus.events'
+    $queryBus: '@messenger.bus.queries'
 
+  #id generators
   Todo\Domain\Todo\TodoIdGenerator: ~
-
   Todo\Application\Todo\Create\TodoCreator:
     $idGenerator: '@Todo\Domain\Todo\TodoIdGenerator'
-
   Shared\Domain\UuidProvider: '@Shared\Infrastructure\StandardUuidProvider'
 
-  Todo\Domain\Todo\Create\CreateTodoHandler:
-    tags:
-      - { name: messenger.message_handler, bus: 'messenger.bus.commands', handles: 'Todo\Domain\Todo\Create\CreateTodo',  method: 'handle' }
-
+  #evetStore
   Shared\Domain\EventStore: '@Shared\Infrastructure\PdoEventStore'
-
-  Todo\Domain\Todo\TodoRepository: '@Todo\Infrastructure\Persistence\Doctrine\Repository\DbalTodoRepository'
-
   Shared\Domain\EventResolver: '@Shared\Infrastructure\InMemoryEventResolver'
-
   Shared\Domain\EventSerializer: ~
 
+  #Repositories
+  Todo\Domain\Todo\TodoRepository: '@Todo\Infrastructure\Persistence\Doctrine\Repository\DbalTodoRepository'
+
+  #Views
   Todo\Domain\Todo\ReadModel\TodoView: '@Todo\Infrastructure\Persistence\Doctrine\ReadModel\DbalTodoView'
 
   #events
   Todo\Domain\Todo\ReadModel\TodoProjector:
     tags:
       - { name: messenger.message_handler, bus: 'messenger.bus.events', handles: 'Todo\Domain\Todo\Create\TodoWasCreated',  method: 'on' }
+
+  #queries
+  Todo\Domain\Todo\Query\TodoQueryHandler:
+    tags:
+      - { name: messenger.message_handler, bus: 'messenger.bus.queries', handles: 'Todo\Domain\Todo\Query\TodoById',  method: 'handle' }
+
+  #commands
+  Todo\Domain\Todo\Create\CreateTodoHandler:
+    tags:
+      - { name: messenger.message_handler, bus: 'messenger.bus.commands', handles: 'Todo\Domain\Todo\Create\CreateTodo',  method: 'handle' }

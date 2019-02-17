@@ -37,6 +37,11 @@ phpspec: disdebug
 behat: disdebug
 	$(CONTAINER-REGULAR-USER) vendor/bin/behat -c behat.yml --format progress -vv
 
+### EXECUTION UNIT TEST SUITE ###
+.PHONY: phpunit
+phpunit: disdebug
+	$(CONTAINER-REGULAR-USER) vendor/bin/phpunit --config=phpunit.xml
+
 ### UP CONTAINERS ###
 .PHONY: containers
 containers:
@@ -44,7 +49,7 @@ containers:
 
 ### RUN TEST SUITES ###
 .PHONY: tests
-tests: disdebug phpspec behat
+tests: disdebug phpunit phpspec behat
 
 ### PHP CONTAINER SHELL ###
 .PHONY: php-shell

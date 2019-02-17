@@ -9,6 +9,7 @@
         "ext-iconv": "*",
         "beberlei/assert": "^3.0",
         "insidestyles/swoole-bridge": "^0.3.0",
+        "lambdish/phunctional": "^1.0",
         "ramsey/uuid": "^3.8",
         "sensio/framework-extra-bundle": "^5.2",
         "symfony/console": "^4.2",
@@ -23,7 +24,7 @@
     },
     "require-dev": {
         "behat/behat": "^3.5",
-        "behat/symfony2-extension": "^2.1",
+        "friends-of-behat/symfony-extension": "^2.0",
         "fzaninotto/faker": "^1.8",
         "phpspec/phpspec": "^5.0",
         "phpunit/phpunit": "^8.0",

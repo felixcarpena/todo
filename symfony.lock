@@ -8,15 +8,6 @@
     "behat/gherkin": {
         "version": "v4.5.1"
     },
-    "behat/symfony2-extension": {
-        "version": "2.1",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "2.1",
-            "ref": "6b63fb76d3bb2dd16098f12adf6d6ca844e21862"
-        }
-    },
     "behat/transliterator": {
         "version": "v1.2.0"
     },
@@ -92,6 +83,15 @@
     "facebook/webdriver": {
         "version": "1.6.0"
     },
+    "friends-of-behat/symfony-extension": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.0",
+            "ref": "78a2c7ae7f228ada6645d58e57cf919b180b7827"
+        }
+    },
     "fzaninotto/faker": {
         "version": "v1.8.0"
     },
@@ -100,6 +100,9 @@
     },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
+    },
+    "lambdish/phunctional": {
+        "version": "v1.0.6"
     },
     "myclabs/deep-copy": {
         "version": "1.8.1"
@@ -340,6 +343,9 @@
     },
     "symfony/property-info": {
         "version": "v4.1.7"
+    },
+    "symfony/proxy-manager-bridge": {
+        "version": "v4.2.3"
     },
     "symfony/psr-http-message-bridge": {
         "version": "v1.1.0"

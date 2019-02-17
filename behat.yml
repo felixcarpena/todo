@@ -4,15 +4,11 @@ default:
       paths:
       - '%paths.base%/tests/behat'
       contexts:
-      - Tests\Behat\Shared\Context\SetupContext:
-          kernel: '@kernel'
+      - Tests\Behat\Shared\Context\SetupContext
       - Tests\Behat\Shared\Context\IdGeneratorContext:
-          idGenerator: '@Aliased\Shared\Infrastructure\InMemoryUuidProvider'
-      - Tests\Behat\Todo\Context\TodoContext:
-          bus: '@Aliased\Shared\Infrastructure\Bus\Bus'
-          todoCreator: '@Aliased\Todo\Application\Todo\Create\TodoCreator'
-          todoView: '@Todo\Domain\Todo\ReadModel\TodoView'
+          idGenerator: '@Shared\Infrastructure\InMemoryUuidProvider'
+      - Tests\Behat\Todo\Context\TodoContext
   extensions:
-    Behat\Symfony2Extension:
+    FriendsOfBehat\SymfonyExtension:
       kernel:
         class: Kernel
