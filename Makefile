@@ -7,6 +7,11 @@ CONTAINER-ROOT-USER=docker exec -w /app -it todo-php
 composer: disdebug
 	$(CONTAINER-REGULAR-USER) $(COMPOSER) $(cmd)
 
+### COMPOSER-INSTALL ###
+.PHONY: composer-install
+composer-install:
+	docker run --rm -it -v $$PWD:/app -u $(id -u):$(id -g) composer install --ignore-platform-reqs
+
 ### EXECUTION HELPER ###
 .PHONY: php
 php: disdebug
@@ -55,3 +60,8 @@ tests: disdebug phpunit phpspec behat
 .PHONY: php-shell
 php-shell:
 	$(CONTAINER-REGULAR-USER) zsh
+
+### INIT DATABASE ###
+.PHONY: init-database
+init-database:
+	$(CONTAINER-REGULAR-USER) bin/console doctrine:database:create && bin/console doctrine:schema:create && yes | bin/console doctrine:migrations:migrate

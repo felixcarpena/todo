@@ -4,7 +4,7 @@ services:
     container_name: todo-php
     build: ./docker/php
     volumes:
-      - ./:/app
+      - ./:/app:cached
     ports:
       - "8080:9501"
     links:
