@@ -20,8 +20,6 @@ class TodoContext implements Context
     private $bus;
     /** @var TodoCreator */
     private $todoCreator;
-    /** @var TodoView */
-    private $todoView;
 
     public function __construct(Bus $bus, TodoCreator $todoCreator)
     {
