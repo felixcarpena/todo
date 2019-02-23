@@ -80,6 +80,9 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "enqueue/amqp-tools": {
+        "version": "0.9.4"
+    },
     "enqueue/dsn": {
         "version": "0.9.2"
     },
@@ -98,6 +101,15 @@
             "config/packages/enqueue.yaml",
             "config/packages/test/enqueue.yaml"
         ]
+    },
+    "enqueue/messenger-adapter": {
+        "version": "0.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.1",
+            "ref": "9a7119f609b576a30dbf03e4fe44212388e96ea1"
+        }
     },
     "enqueue/null": {
         "version": "0.9.2"
@@ -341,6 +353,9 @@
             "version": "4.1",
             "ref": "f11dfa18618a8a5dd853ea3a302db2e0557e031c"
         }
+    },
+    "symfony/options-resolver": {
+        "version": "v4.2.3"
     },
     "symfony/orm-pack": {
         "version": "v1.0.5"
