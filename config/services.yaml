@@ -61,3 +61,9 @@ services:
   Todo\Domain\Todo\Create\CreateTodoHandler:
     tags:
       - { name: messenger.message_handler, bus: 'messenger.bus.commands', handles: 'Todo\Domain\Todo\Create\CreateTodo',  method: 'handle' }
+
+  #Processors
+  acme.foo_processor:
+    class: 'Enqueue\MessengerAdapter\MessageBusProcessor'
+    tags:
+      - { name: 'enqueue.client.processor', topicName: 'messages' }
