@@ -2,6 +2,15 @@ framework:
   messenger:
     transports:
       amqp: "%env(MESSENGER_TRANSPORT_DSN)%"
+      amqp_todo_was_created:
+        dsn: "%env(MESSENGER_TRANSPORT_DSN)%"
+        options:
+          exchange:
+            name: todo_exchange
+            type: topic
+          queue:
+            name: todo-was-created-sincronize-with-other-system
+            routing_key: todo.todo_was_created
 
     # The bus that is going to be injected when injecting MessageBusInterface:
     default_bus: messenger.bus.commands
@@ -16,6 +25,9 @@ framework:
       messenger.bus.queries: ~
 
     routing:
+      'Todo\Domain\Todo\Create\TodoWasCreated':
+        senders: [amqp_todo_was_created]
+        send_and_handle: true
       'Shared\Domain\Messaging\AsyncMessage':
         senders: [amqp]
         send_and_handle: true
