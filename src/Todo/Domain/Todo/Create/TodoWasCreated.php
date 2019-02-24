@@ -50,4 +50,10 @@ final class TodoWasCreated implements Event
             'description' => $this->description,
         ];
     }
+
+    public function topic(): string
+    {
+        return $this->eventName();
+    }
+
 }

@@ -1,7 +1,7 @@
 framework:
   messenger:
     transports:
-      amqp: "%env(MESSENGER_TRANSPORT_DSN)%"
+      amqp: enqueue://default
 
     # The bus that is going to be injected when injecting MessageBusInterface:
     default_bus: messenger.bus.commands
@@ -12,6 +12,8 @@ framework:
         middleware:
           - 'Shared\Infrastructure\Bus\Middleware\FinishesHandlingMessageBeforeHandlingNext'
       messenger.bus.events:
+        middleware:
+          - 'Shared\Infrastructure\Bus\Middleware\AddingRoutingKeyOnAsync'
         default_middleware: allow_no_handlers
       messenger.bus.queries: ~
 

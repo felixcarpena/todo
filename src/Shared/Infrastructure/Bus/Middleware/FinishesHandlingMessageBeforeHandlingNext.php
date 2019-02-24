@@ -30,6 +30,6 @@ class FinishesHandlingMessageBeforeHandlingNext implements MiddlewareInterface
             $this->isHandling = false;
         }
 
-        return $envelope;
+        return $stack->next()->handle($envelope, $stack);
     }
 }
