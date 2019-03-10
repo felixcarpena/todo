@@ -52,6 +52,11 @@ phpunit: disdebug
 containers:
 	docker-compose up -d
 
+### REMOVE CONTAINERS ###
+.PHONY: containers-rm
+containers-rm:
+	docker-compose stop && docker-compose rm -f
+
 ### RUN TEST SUITES ###
 .PHONY: tests
 tests: disdebug phpunit phpspec behat

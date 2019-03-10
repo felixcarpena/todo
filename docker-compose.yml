@@ -2,16 +2,14 @@ version: '2'
 services:
   php:
     container_name: todo-php
-    build: ./docker/php
+    image: felixcarpena/php-swoole
     volumes:
       - ./:/app:cached
     ports:
       - "8080:9501"
     links:
       - db
-    networks:
-      todo_net:
-        ipv4_address: 172.16.238.2
+      - rabbit
     command: php /app/public/index.php
 
   db:
@@ -25,9 +23,6 @@ services:
     - "5432:5432"
     volumes:
     - ./postgres-data:/var/lib/postgresql/data
-    networks:
-      todo_net:
-        ipv4_address: 172.16.238.3
 
   rabbit:
     hostname: todo-rabbit
@@ -39,16 +34,5 @@ services:
     - VIRTUAL_HOST=/
     - VIRTUAL_PORT=15672
     ports:
-    - "127.0.0.1::15672"
-    - "127.0.0.1::5672"
-    networks:
-      todo_net:
-        ipv4_address: 172.16.238.4
-networks:
-  todo_net:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-      - subnet: 172.16.238.0/24
-        gateway: 172.16.238.1
+    - "15672:15672"
+    - "5672:5672"

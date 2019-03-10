@@ -1,0 +1,33 @@
+language: generic
+
+sudo: required
+
+services:
+  - docker
+
+addons:
+  apt:
+    packages:
+      - docker-ce
+
+before_install:
+  - sudo /etc/init.d/postgresql stop
+  - sudo cp $TRAVIS_BUILD_DIR/.env.dist $TRAVIS_BUILD_DIR/.env
+
+install:
+  - make composer-install
+  - make containers
+
+before_script:
+  - sudo chmod -R 777 $TRAVIS_BUILD_DIR/build
+  - docker-compose ps
+  - docker-compose top
+
+script:
+  - make tests
+
+after_script:
+  - make containers-rm
+
+notifications:
+  email: false

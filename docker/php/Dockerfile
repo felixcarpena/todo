@@ -23,10 +23,10 @@ RUN docker-php-ext-install bcmath
 RUN docker-php-ext-install opcache
 
 # install xdebug
-RUN pecl install xdebug-2.7.0beta1 && docker-php-ext-enable xdebug
+RUN pecl install xdebug-2.7.0 && docker-php-ext-enable xdebug
 
 # install swoole
-RUN pecl install swoole-4.2.12 && docker-php-ext-enable swoole
+RUN pecl install swoole-4.3.0 && docker-php-ext-enable swoole
 
 # install amqp
 RUN apt-get install -y librabbitmq-dev && pecl install amqp-1.9.4 && docker-php-ext-enable amqp
