@@ -29,5 +29,8 @@ script:
 after_script:
   - make containers-rm
 
+after_success:
+  - make coverall
+
 notifications:
   email: false

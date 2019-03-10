@@ -1,3 +1,5 @@
+include .env
+
 COMPOSER=composer
 CONTAINER-REGULAR-USER=docker exec -w /app -itu docker todo-php
 CONTAINER-ROOT-USER=docker exec -w /app -it todo-php
@@ -46,6 +48,11 @@ behat: disdebug
 .PHONY: phpunit
 phpunit: disdebug
 	$(CONTAINER-REGULAR-USER) vendor/bin/phpunit --config=phpunit.xml
+
+### COVERALL - PHP ###
+.PHONY: coverall
+coverall:
+	docker exec -w /app --env COVERALLS_REPO_TOKEN=$(COVERALLS_REPO_TOKEN) -it todo-php php vendor/bin/php-coveralls --coverage_clover=build/clover.xml --json_path=build/coveralls-upload.json -v
 
 ### UP CONTAINERS ###
 .PHONY: containers
