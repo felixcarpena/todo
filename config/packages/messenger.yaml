@@ -27,7 +27,7 @@ framework:
 
     routing:
       'Todo\Domain\Todo\Create\TodoWasCreated':
-        senders: [amqp_todo_was_created, gps]
+        senders: [amqp]
         send_and_handle: true
       'Shared\Domain\Messaging\AsyncMessage':
         senders: [amqp]
