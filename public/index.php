@@ -6,6 +6,9 @@ use Insidestyles\SwooleBridge\Builder\RequestBuilderFactory;
 use Insidestyles\SwooleBridge\Emiter\SwooleResponseEmitter;
 use Insidestyles\SwooleBridge\Handler;
 use Psr\Log\NullLogger;
+use Swoole\Http\Request;
+use Swoole\Http\Response;
+use Swoole\Http\Server;
 use Symfony\Component\Debug\Debug;
 use Symfony\Component\Dotenv\Dotenv;
 
@@ -36,11 +39,9 @@ $adapter = new SymfonyAdapter($responseEmitter, $psr15Kernel, $requestBuilderFac
 $logger = new NullLogger();
 $handler = new Handler($adapter, $logger);
 
-$http = new \Swoole\Http\Server("0.0.0.0", 9501);
-$http->on('request', function (\Swoole\Http\Request $request, \Swoole\Http\Response $response) use ($handler, $debug) {
+$http = new Server("0.0.0.0", 9501);
+$http->on('request', function (Request $request, Response $response) use ($handler, $debug) {
     $handler->handle($request, $response);
 });
 
 $http->start();
-
-

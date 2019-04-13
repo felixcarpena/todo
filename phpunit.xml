@@ -20,6 +20,14 @@
         <!-- ###+ symfony/messenger ### -->
         <!-- MESSENGER_TRANSPORT_DSN=amqp://guest:guest@localhost:5672/%2f/messages -->
         <!-- ###- symfony/messenger ### -->
+
+        <!-- ###+ enqueue/enqueue-bundle ### -->
+        <env name="ENQUEUE_DSN" value="null://"/>
+        <!-- ###- enqueue/enqueue-bundle ### -->
+
+        <!-- ###+ enqueue/gps ### -->
+        <env name="PUBSUB_EMULATOR_HOST" value="http://localhost:8900"/>
+        <!-- ###- enqueue/gps ### -->
     </php>
 
     <testsuites>

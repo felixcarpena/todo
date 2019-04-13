@@ -1,0 +1,7 @@
+enqueue:
+    default:
+        transport: '%env(resolve:ENQUEUE_DSN)%'
+        client: ~
+    gps:
+        transport: 'gps:todo-messages?keyFilePath=/app/config/gps-settings.json'
+        client: ~
